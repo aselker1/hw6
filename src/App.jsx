@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Header } from './Components'
+import { Search } from './Components'
 import { Main } from './pages'
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
         <div>
             <Router>
                 <Routes>
-                    <Route element={<Header />} >
+                    <Route element={<Search/>} >
                         <Route path='/' element={<Main />} />
                     </Route>
                 </Routes>

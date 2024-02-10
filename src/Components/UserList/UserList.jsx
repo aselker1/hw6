@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser, fetchAllUsers, createUser } from '../../store/reducers/userReducer';
-import ModalWindow from '../../pages/ModalWindow/ModalWindow';
+import { deleteUser, fetchAllUsers, createUser,editUser } from '../../store/reducers/reducer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import classes from '../../Components/UserList/UserList.module.css'
 import Search from '../Search/Search';
+import { DetailsUser } from '../../pages';
 
 
 const UserList = () => {
@@ -36,7 +36,7 @@ const UserList = () => {
 
 
         <div>
-            <h1>UserList</h1>
+            <h1>Students List</h1>
             <hr />
             <Search data={users} onSearch={handleSearch} />
 
@@ -48,7 +48,7 @@ const UserList = () => {
 
             {
                 !modalOpen && (
-                    <button onClick={() => setModalOpen(true)}>New Show</button>
+                    <button onClick={() => setModalOpen(true)}>Add New Student</button>
 
 
 
@@ -57,7 +57,7 @@ const UserList = () => {
             }
             {
                 modalOpen && (
-                    <ModalWindow onSubmit={showUser} />
+                    <DetailsUser onSubmit={showUser} />
 
                 )
             }
@@ -81,7 +81,7 @@ const UserList = () => {
                             users.map((user) => {
                                 return (
                                     <tr className={classes.block}>
-                                        <td><img src="https://s.hdnux.com/photos/51/23/24/10827008/4/1200x0.jpg" alt="" /></td>
+                                        <td><img src="https://img.freepik.com/premium-psd/young-female-model-with-beautiful-healthy-and-clean-skin-shown-isolated-on-a-transparent-background_410516-114552.jpg" alt="" /></td>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
                                         <td>{user.phone}</td>

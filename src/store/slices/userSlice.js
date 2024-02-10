@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {createUser, deleteUser, fetchAllUsers} from '../reducers/userReducer';
+import { createUser, deleteUser, editUser, fetchAllUsers } from '../reducers/reducer';
 
 
 const initialState  = {
     users: [],
-    isLoading: false,
-    isError: '',
+    isUsersLoading: false,
+    usersError: '',
+    userStatus: 'pending',
 };
 
 
@@ -17,55 +18,62 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllUsers.pending, (state) => {
-            state.isLoading = true;
-            state.isError = '';
+            state.isUsersLoading = true;
+            state.usersError = '';
             state.users = [];
+            state.userStatus = 'pending';
         })
 
 
         builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isError = '';
+            state.isUsersLoading = false;
             state.users = action.payload;
+            state.userStatus = 'fulfilled';
         })
 
 
         builder.addCase(fetchAllUsers.rejected, (state, action) => {
-            state.isError = action.payload;
-            state.isLoading = false;
-            state.users = [];
+            state.usersError = action.payload;
+            state.isUsersLoading = false;
+            state.userStatus = 'rejected';
         })
 
 
         builder.addCase(deleteUser.pending, (state) => {
-            state.isLoading = true;
-            state.isError = '';
+            state.isUsersLoading = true;
+            state.usersError = '';
+            state.users = [];
+            state.userStatus = 'pending';
         })
         builder.addCase(deleteUser.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isError = '';
+            state.isUsersLoading = false;
+            state.userStatus = 'fulfilled';
             state.users = state.users.filter((user) => user.id !== action.payload);
         })
         builder.addCase(deleteUser.rejected, (state, action) => {
-            state.isError = action.payload;
-            state.isLoading = false;
+            state.usersError = action.payload;
+            state.isUsersLoading = false;
+            state.userStatus = 'rejected';
         })
 
 
         builder.addCase(createUser.pending, (state) => {
-            state.isLoading = true;
-            state.isError = '';
+            state.isUsersLoading = true;
+            state.usersError = '';
+            state.users = [];
+            state.userStatus = 'pending';
         })
         builder.addCase(createUser.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isError = '';
+            state.isUsersLoading = false;
+            state.userStatus = 'fulfilled';
             state.users.push (action.payload);
         })
 
 
         builder.addCase(createUser.rejected, (state, action) => {
-            state.isError = action.payload;
-            state.isLoading = false;
+            state.usersError = action.payload;
+            state.isUsersLoading = false;
+            state.userStatus = 'rejected';
         })
 
 
